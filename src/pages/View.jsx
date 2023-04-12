@@ -68,8 +68,8 @@ const View = () => {
         }
     ]
 
-    const activeStyle = ` btn ${!collapse ? 'd-flex  align-items-center' : ''}  rounded-0 py-2 bg-white text-dark`
-    const not_activeStyle = `btn ${!collapse ? 'd-flex  align-items-center' : ''} rounded-0 py-2 bg-transparent text-white `
+    const activeStyle = ` btn ${!collapse ? 'd-flex  align-items-center' : ''}  rounded-0 py-4 bg-white text-dark`
+    const not_activeStyle = `btn ${!collapse ? 'd-flex  align-items-center' : ''} rounded-0 py-4 bg-transparent text-white `
 
     return (
         <Layout style={{height: '100vh', width:'100%'}} >
@@ -84,7 +84,7 @@ const View = () => {
                 {
                     items.map((item) => (
                         <Tooltip key={ item.title } placement="right" title={collapse  && item.title} >
-                            <NavLink className={ ({isActive}) => (isActive ? activeStyle : not_activeStyle )} type="button" to= { `./${item.to}` } >
+                            <NavLink className={ ({isActive}) => (isActive ? activeStyle : not_activeStyle ) } type="button" to= { `./${item.to}` } >
                                 {item.icon}
                                 <span className={collapse ? 'collapse collapse-horizontal' : ''} >
                                     {item.title}
@@ -114,7 +114,7 @@ const View = () => {
             {/* <Footer style={footerStyle}>Footer</Footer> */}
         </Layout>
 
-        </Layout>
+    </Layout>
     );
 };
 
