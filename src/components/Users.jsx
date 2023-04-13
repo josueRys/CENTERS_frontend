@@ -1,7 +1,7 @@
 import { useState } from "react"
 import FlexButton from "./FlexButton"
 import ModalComp from "./ModalComp"
-import FormCenter from "./FormCenter"
+import FormUser from "./FormUser"
 
 const Users = () => {
     const [ show, setShow ] = useState(false)
@@ -18,9 +18,9 @@ const Users = () => {
             }
             {
                 show && <ModalComp
-                            body = { <FormCenter setReload={setReload} reload={reload} handleClose={handleClose}  /> }
+                            body = { <FormUser handleClose={handleClose}  /> }
                             onClose = { handleClose }
-                            title = 'Nuevo Centro'
+                            title = 'Nuevo Usuario'
                             size = 'lg'
                         />
             }
