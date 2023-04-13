@@ -3,6 +3,7 @@ import Struct from './pages/View'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Centers from './components/Centers'
 import Login from './components/Login'
+import Users from './components/Users'
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element = {<Struct />}>
             <Route path='centers' element = { <Centers/> } />
-            <Route path='users' element={<h1>Usuarios</h1>} />
+            <Route path='users' element={<Users />} />
             <Route path='registers' element={<h1>Registros</h1>} />
             <Route path='computers' element={<h1>Computadoras</h1>} />
             <Route path='*' element={<h1>Not Found</h1>} />
