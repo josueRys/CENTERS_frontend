@@ -21,7 +21,7 @@ const Users = () => {
                             body = { <FormUser handleClose={handleClose}  /> }
                             onClose = { handleClose }
                             title = 'Nuevo Usuario'
-                            size = 'lg'
+                            size = 'md'
                         />
             }
         </div>

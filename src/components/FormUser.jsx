@@ -1,11 +1,15 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import { createUser } from '../api/user';
 
-const FormUser = () => {
+const FormUser = ( {handleClose} ) => {
 
     const onFinish = async values => {
         console.log(values)    
+        const res = await createUser(values)
+        console.log(res)
+        handleClose()
       };
 
   return (
