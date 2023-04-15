@@ -1,4 +1,4 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUser } from '../api/user';
@@ -16,7 +16,7 @@ const FormUser = ( {handleClose} ) => {
         <Form name="normal_login" className="login-form" initialValues={{ remember: true, }} onFinish={onFinish} >
 
             <Form.Item name="username" rules={[ { required: true, message: 'Ingresa el nombre del Usuario!', }, ]} >
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" />
+                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" type='text' />
             </Form.Item>
 
             <Form.Item name="password" rules={[ { required: true, message: 'Ingresa tu contraseña!', }, ]} >
@@ -28,7 +28,7 @@ const FormUser = ( {handleClose} ) => {
             </Form.Item>
 
             <Form.Item name="phone_number" rules={[ { required: true, message: 'Ingresa el número!', }, ]} >
-                <Input prefix={<LockOutlined className="site-form-item-icon" />} type="text" placeholder="Numero telefónico" />
+                <Input prefix={<PhoneOutlined className="site-form-item-icon" />} type="text" placeholder="Numero telefónico" />
             </Form.Item>
             {/* <Form.Item>
                 <Form.Item name="remember" valuePropName="checked" noStyle>

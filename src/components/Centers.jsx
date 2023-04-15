@@ -8,7 +8,7 @@ import FormCenter from "./FormCenter";
 import ModalComp from "./ModalComp";
 import PaginationComp from "./PaginationComp.jsx";
 import SkeletonComp from "./SkeletonComp.jsx";
-import { MdDelete, MdRemoveRedEye, MdSystemUpdate } from "react-icons/md";
+import { MdDelete, MdRemoveRedEye, MdSystemUpdate, MdDriveFileRenameOutline } from "react-icons/md";
 
 const Centers = () => {
     const [ show, setShow ] = useState(false)
@@ -57,7 +57,7 @@ const Centers = () => {
     }
 
     const events = [ { icon: <MdDelete style={{ width:'100%', height:'auto' }} />, variant:'danger', onclick: handleDelete, tooltip:[ 'Eliminar','left' ] }, 
-                     { icon: <MdSystemUpdate style={{ width:'100%', height:'auto' }} />, variant:'success', onclick: handleUpdate, tooltip:[ 'Actualizar','top' ] }, 
+                     { icon: <MdDriveFileRenameOutline style={{ width:'100%', height:'auto' }} />, variant:'success', onclick: handleUpdate, tooltip:[ 'Actualizar','top' ] }, 
                     /*  { icon: <MdRemoveRedEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: handleView, tooltip:[ 'Ver','right' ] } */ ]
     
     const titles = [ 'Nombre', 'Coordenadas','Dirección' , 'Teléfono', 'Eventos' ]
@@ -65,7 +65,7 @@ const Centers = () => {
     const widths = [ '17%','25%','27%','15%','15%' ]
 
     return (
-        <div className="py-3 ">
+        <div >
             {/* <h1>Centros</h1> */}
             <FlexButton titleTip= 'Nuevo Centro' tooltipPosition = 'left' onClick={handleShowModal} style={{ bottom: 20, right: 20 }} />
             {
