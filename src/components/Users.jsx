@@ -6,22 +6,26 @@ import { readUsers } from "../api/user"
 import TableComp from "./TableComp"
 import SkeletonComp from "./SkeletonComp"
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md"
+import PaginationComp from "./PaginationComp"
 
 const Users = () => {
     const [ show, setShow ] = useState(false)
     const [ users, setUsers ] = useState(null)
+    const [ current, setCurrent ] = useState(1)
+    const [ totalItems, setTotalItems ] = useState(0)
 
     const handleShowModal = () => setShow(true)
     const handleClose = () => setShow(false)
 
     useEffect( () => {
         getData()
-    }, [] )
+    }, [ current ] )
 
     const getData = async () =>{
-        const res = await readUsers()
+        const res = await readUsers(current)
         setUsers(res.data.data)
-        console.log(res.data)
+        console.log(res.data.totalCount)
+        setTotalItems(res.data.totalCount)
     }
     const handleDelete = (row) => {
         console.log(`Eliminando ${row}`)
@@ -47,6 +51,12 @@ const Users = () => {
                 users 
                     ? <TableComp events={events} data={users} titles={titles} widths = { widths } /> 
                     : <SkeletonComp />
+            }
+            {
+                <PaginationComp current={current}
+                                totalItems={totalItems}
+                                onChange={ (current) => { setCurrent(current) } }
+                />
             }
             {
                 show && <ModalComp

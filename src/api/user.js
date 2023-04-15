@@ -11,7 +11,7 @@ export const createUser = async ({username, password, phone_number}) => {
     return res.status
 }
 
-export const readUsers = async () => {
-    const res = await axios.get(`${__API__}users?page=1`)
+export const readUsers = async (current) => {
+    const res = await axios.get(`${__API__}users?page=${current}`)
     return res
 }
