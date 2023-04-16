@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import FlexButton from "./FlexButton"
 import ModalComp from "./ModalComp"
 import FormUser from "./FormUser"
-import { readUsers } from "../api/user"
+import { readUser, readUsers } from "../api/user"
 import TableComp from "./TableComp"
 import SkeletonComp from "./SkeletonComp"
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md"
@@ -10,16 +10,22 @@ import PaginationComp from "./PaginationComp"
 
 const Users = () => {
     const [ show, setShow ] = useState(false)
+    const [ show2, setShow2 ] = useState(false)
     const [ users, setUsers ] = useState(null)
     const [ current, setCurrent ] = useState(1)
     const [ totalItems, setTotalItems ] = useState(0)
+    const [ update, setUpdate ] = useState(null)
+    const [ reload, setReload ] = useState(1)
 
     const handleShowModal = () => setShow(true)
-    const handleClose = () => setShow(false)
+    const handleClose = () => {
+        setShow(false)
+        setShow2(false)
+    }
 
     useEffect( () => {
         getData()
-    }, [ current ] )
+    }, [ current, reload ] )
 
     const getData = async () =>{
         const res = await readUsers(current)
@@ -31,8 +37,12 @@ const Users = () => {
         console.log(`Eliminando ${row}`)
     }
 
-    const handleUpdate = (row) => {
-        console.log(`Actualizando ${row}`)
+    const handleUpdate = async (row) => {
+        // console.log(`Actualizando ${row}`)
+        const res = await readUser(row)
+        console.log(res.data)
+        setUpdate(res.data)
+        setShow2(true)
     }
 
     const widths = [ 'auto', 'auto', 'auto' ]
@@ -60,7 +70,15 @@ const Users = () => {
             }
             {
                 show && <ModalComp
-                            body = { <FormUser handleClose={handleClose}  /> }
+                            body = { <FormUser handleClose={handleClose} setReload={setReload} reload={reload}  /> }
+                            onClose = { handleClose }
+                            title = 'Nuevo Usuario'
+                            size = 'md'
+                        />
+            }
+            {
+                show2 && <ModalComp
+                            body = { <FormUser handleClose={handleClose} update={update} setReload={setReload} reload={reload}  /> }
                             onClose = { handleClose }
                             title = 'Nuevo Usuario'
                             size = 'md'

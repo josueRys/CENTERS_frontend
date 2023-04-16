@@ -42,7 +42,7 @@ const Login = () => {
             </Form.Item>
 
             <Form.Item name="password" rules={[ { required: true, message: 'Ingresa tu contraseña!', }, ]} >
-                <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Contraseña" />
+                <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Contraseña" />
             </Form.Item>
 
             {/* <Form.Item>
