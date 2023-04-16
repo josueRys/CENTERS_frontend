@@ -30,10 +30,16 @@ const Centers = () => {
     },[reload,current])
 
     const getData = async () => {
-        const { data } = await readCenters(current)
-        let {totalCount} = data
-        setTotalItems(totalCount)
-        setCenters( data.data )
+        const res = await readCenters(current)
+        if (res.status === 200){
+            const { data } = res
+            let {totalCount} = data
+            setTotalItems(totalCount)
+            setCenters( data.data )
+        } else {
+            setTotalItems(0)
+            setCenters( [] )
+        }
     }
 
     const handleDelete = async (row) => {

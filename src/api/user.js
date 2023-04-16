@@ -33,6 +33,11 @@ export const deleteUser = async (id) => {
 }
 
 export const readUsers = async (current) => {
-    const res = await axios.get(`${__API__}users?page=${current}`)
-    return res
+    let res = {data: { data:[],totalCount:0 } }
+    try {
+        res = await axios.get( `${__API__}users?page=${current}`)
+        return res
+    } catch (error) {
+        return res       
     }
+}

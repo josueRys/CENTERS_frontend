@@ -29,8 +29,15 @@ const Users = () => {
 
     const getData = async () =>{
         const res = await readUsers(current)
-        setUsers(res.data.data)
-        setTotalItems(res.data.totalCount)
+        if(res.status === 200){
+            const { data } = res
+            let {totalCount} = data
+            setTotalItems(totalCount)
+            setUsers( data.data )
+        } else {
+            setUsers([])
+            setTotalItems(0)
+        }
     }
     const handleDelete = async (row) => {
         let res = window.confirm('¿Seguro que quieres eliminar el elemento?')
@@ -65,7 +72,7 @@ const Users = () => {
                     : <SkeletonComp />
             }
             {
-                <PaginationComp current={current}
+                totalItems > 0 && <PaginationComp current={current}
                                 totalItems={totalItems}
                                 onChange={ (current) => { setCurrent(current) } }
                 />
