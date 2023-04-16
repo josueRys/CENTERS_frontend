@@ -11,11 +11,6 @@ export const createUser = async ({username, password, phone_number}) => {
     return res.status
 }
 
-export const readUsers = async (current) => {
-    const res = await axios.get(`${__API__}users?page=${current}`)
-    return res
-}
-
 export const readUser = async (id) => {
     const res = await axios.get(`${__API__}users/${id}`)
     return res
@@ -28,6 +23,16 @@ export const updateUser = async (id, form) => {
         password,
         phone_number
     })
-
+    
     return res.status
 }
+
+export const deleteUser = async (id) => {
+    const res = await axios.delete(`${__API__}users/${id}`)
+    return res
+}
+
+export const readUsers = async (current) => {
+    const res = await axios.get(`${__API__}users?page=${current}`)
+    return res
+    }

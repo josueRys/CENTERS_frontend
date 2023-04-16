@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import FlexButton from "./FlexButton"
 import ModalComp from "./ModalComp"
 import FormUser from "./FormUser"
-import { readUser, readUsers } from "../api/user"
+import { deleteUser, readUser, readUsers } from "../api/user"
 import TableComp from "./TableComp"
 import SkeletonComp from "./SkeletonComp"
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md"
@@ -30,22 +30,24 @@ const Users = () => {
     const getData = async () =>{
         const res = await readUsers(current)
         setUsers(res.data.data)
-        console.log(res.data.totalCount)
         setTotalItems(res.data.totalCount)
     }
-    const handleDelete = (row) => {
-        console.log(`Eliminando ${row}`)
+    const handleDelete = async (row) => {
+        let res = window.confirm('¿Seguro que quieres eliminar el elemento?')
+
+        if (res === true){
+            await deleteUser(row)
+            setReload(reload+1)
+        }
     }
 
     const handleUpdate = async (row) => {
-        // console.log(`Actualizando ${row}`)
         const res = await readUser(row)
-        console.log(res.data)
         setUpdate(res.data)
         setShow2(true)
     }
 
-    const widths = [ 'auto', 'auto', 'auto' ]
+    const widths = [ '30%', '30%', '25%','15%' ]
 
     const titles = [ 'Usuario', 'Password', 'Telefono', 'Eventos' ]
     const events = [ { icon: <MdDelete style={{ width:'100%', height:'auto' }} />, variant:'danger', onclick: handleDelete, tooltip:[ 'Eliminar','left' ] }, 
@@ -80,7 +82,7 @@ const Users = () => {
                 show2 && <ModalComp
                             body = { <FormUser handleClose={handleClose} update={update} setReload={setReload} reload={reload}  /> }
                             onClose = { handleClose }
-                            title = 'Nuevo Usuario'
+                            title = 'Actualizar Usuario'
                             size = 'md'
                         />
             }
