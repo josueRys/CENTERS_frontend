@@ -41,7 +41,7 @@ const FormUser = ( {setReload, reload, handleClose, update = null} ) => {
      ]
 
     return (
-        <Form fields={fields} name="normal_login" className="login-form" initialValues={{ remember: true, }} onFinish={onFinish} >
+        <Form fields={fields} /* name="normal_login" className="login-form" */ initialValues={{ remember: false, }} onFinish={onFinish} >
 
             <Form.Item name="username" rules={[ { required: true, message: 'Ingresa el nombre del Usuario!', }, ]} >
                 <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" type='text' />

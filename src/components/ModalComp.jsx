@@ -1,52 +1,30 @@
-import React, { useState } from "react";
-import { Modal } from "react-bootstrap";
-import PropTypes from 'prop-types';
+import { Button, Modal } from 'antd';
+import { useState } from 'react';
+const ModalComp = ( props ) => {
 
-const ModalComp = (props) => {
-    const {
-        onClose,
+    const { 
         title,
+        onClose,
         body,
-        footer,
-        size,
         keyboard,
-        backdrop } = props;
+        maskClosable,
+        size } = props
 
-    const [show, setShow] = useState(true);
+        
 
-    const handleClose = () => {
-        onClose();
-        setShow(false);
-    }
-
-    return (
-        <Modal
-            show={show}                                 // Indica si el modal está activo
-            onHide={handleClose}                        // Función para cerrar modal
-            size={size ? size : 'md'}                   // Tamaño mediano por default
-            backdrop={backdrop || 'static'}// No se puede hacer click afuera por default
-            keyboard={keyboard || false}// No se puede salir del modal presionando ESC
-        >
-            <Modal.Header closeButton>
-                <Modal.Title><h3 style={{ color: '#000' }}>{title || 'Cargando título...'}</h3></Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{body}</Modal.Body>
-
-            {   // Si hay footer se muestra la sección
-                footer ? <Modal.Footer>{footer}</Modal.Footer> : null
-            }
-        </Modal>
-    );
-}
-
-ModalComp.propTypes = {
-    onClose: PropTypes.any,
-    title: PropTypes.string.isRequired,
-    body: PropTypes.any.isRequired,
-    footer: PropTypes.any,
-    size: PropTypes.string,
-    keyboard: PropTypes.bool,
-    backdrop: PropTypes.string
-}
-
+  return (
+    <Modal
+        title={title}
+        width={size === 'hr' ? '55%' : '40%'}
+        open={true}
+        onOk={onClose}
+        onCancel={onClose}
+        footer={[]}
+        keyboard={keyboard || false}
+        maskClosable = {maskClosable || false}
+    >
+        <div> {body} </div>
+    </Modal>
+  );
+};
 export default ModalComp;
