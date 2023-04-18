@@ -16,6 +16,15 @@ export const readUser = async (id) => {
     return res
 }
 
+export const readUserName = async (idCenter) => {
+    try {
+        const res = await axios.get(`${__API__}users?idCenter=${idCenter}`)
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
 export const updateUser = async (id, form) => {
     const { username, password, phone_number } = form
     const res = await axios.patch(`${__API__}users/${id}`,{
