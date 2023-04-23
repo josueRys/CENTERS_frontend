@@ -5,6 +5,7 @@ import Centers from './components/Centers'
 import Login from './components/Login'
 import Users from './components/Users'
 import Registers from './components/Registers'
+import Computers from './components/Computers'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
             <Route path='centers' element = { <Centers/> } />
             <Route path='users' element={<Users />} />
             <Route path='registers' element={<Registers />} />
-            <Route path='computers' element={<h1>Computadoras</h1>} />
+            <Route path='computers' element={ <Computers /> } />
             <Route path='*' element={<h1>Not Found</h1>} />
           </Route>
         </Routes>

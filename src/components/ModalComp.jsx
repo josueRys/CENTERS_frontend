@@ -15,7 +15,7 @@ const ModalComp = ( props ) => {
     return (
       <Modal
           title={title}
-          width={size === 'hr' ? '55%' : '40%'}
+          width={size === 'hr' ? '30%' : '40%'}
           open={true}
           onOk={onClose}
           onCancel={onClose}
@@ -23,7 +23,7 @@ const ModalComp = ( props ) => {
           keyboard={keyboard || false}
           maskClosable = {maskClosable || false}
       >
-          <div> {body} </div>
+        {body}
       </Modal>
     );
 };

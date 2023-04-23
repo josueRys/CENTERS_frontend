@@ -68,8 +68,8 @@ const View = () => {
         }
     ]
 
-    const activeStyle = ` btn ${!collapse ? 'd-flex  align-items-center' : ''}  rounded-0 py-4 bg-white text-dark`
-    const not_activeStyle = `btn ${!collapse ? 'd-flex  align-items-center' : ''} rounded-0 py-4 bg-transparent text-white `
+    const activeStyle = ` btn ${!collapse ? 'd-flex  align-items-center' : ''}  rounded-0 py-3 bg-white text-dark`
+    const not_activeStyle = `btn ${!collapse ? 'd-flex  align-items-center' : ''} rounded-0 py-3 bg-transparent text-white `
 
     return (
         <Layout style={{height: '100vh', width:'100%'}} >

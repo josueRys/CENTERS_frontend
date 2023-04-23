@@ -74,22 +74,21 @@ const FormRegister = ( {handleClose} ) => {
     return (
             
         <Form fields={fields} onFinish={onFinish} >
-
+            <Col span={24} >
+                <Form.Item name="center" rules={[ { required: true, message: 'Selecciona un Centro!', }, ]} >
+                    <Select
+                        showSearch
+                        filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
+                        notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                        placeholder="Centro"
+                        optionFilterProp="children"
+                        onChange={onChangeCenter}
+                        options={centers}
+                    />
+                </Form.Item>
+            </Col>
             <Space.Compact block >
-                <Col span={7} >
-                    <Form.Item name="center" rules={[ { required: true, message: 'Selecciona un Centro!', }, ]} >
-                        <Select
-                            showSearch
-                            filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
-                            notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                            placeholder="Centro"
-                            optionFilterProp="children"
-                            onChange={onChangeCenter}
-                            options={centers}
-                        />
-                    </Form.Item>
-                </Col>
-                <Col span={7} >
+                <Col span={12} >
                     <Form.Item name="user" rules={[ { required: true, message: 'Selecciona un Usuario!', }, ]} >
                         <Select
                             showSearch
@@ -102,12 +101,12 @@ const FormRegister = ( {handleClose} ) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col span={7} >
+                <Col span={12} >
                     <Form.Item name="computer" rules={[ { required: true, message: 'Selecciona un Equipo!', }, ]} >
                         <Select
                             showSearch
                             notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                            placeholder="Equipo"
+                            placeholder="Equipo de cómputo"
                             optionFilterProp="children"
                             // onChange={onChange}
                             filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
@@ -115,13 +114,12 @@ const FormRegister = ( {handleClose} ) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col span={3} >
-                    <Form.Item>
-                        <Button type='primary' htmlType="submit" className="login-form-button btn-success" style={{ width:'100%' }} >Registrar</Button>
-                    </Form.Item>
-                </Col>               
             </Space.Compact>
-
+            <Col span={24} >
+                <Form.Item>
+                    <Button type='primary' htmlType="submit" className="login-form-button btn-success" style={{ width:'100%' }} >Registrar</Button>
+                </Form.Item>
+            </Col>
         </Form>
   );
 };
