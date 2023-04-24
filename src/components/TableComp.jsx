@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Tooltip } from 'antd';
+import {  Select, Tooltip } from 'antd';
   
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -29,8 +29,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
 
 import { Empty } from 'antd';
+// import { FormControl, MenuItem, Select } from '@mui/material';
 
-const TableComp = ( { data, titles, widths, events } ) => {
+const TableComp = ( { data, titles, widths, events, changeStatus } ) => {    
     return (
     data.length == 0
         ?   <Empty description={ <h5>Sin datos</h5> } />
@@ -60,7 +61,7 @@ const TableComp = ( { data, titles, widths, events } ) => {
                                             ))
                                         }
                                         {
-                                            <StyledTableCell style={{ padding: '5px 0', display:'flex' }} >
+                                            events && <StyledTableCell style={{ padding: '5px 0', display:'flex' }} >
                                                 {
                                                     events.map(({variant, onclick, icon, tooltip},index) => (
                                                         <Tooltip title={tooltip[0]} placement={tooltip[1]} key={index} >
@@ -73,6 +74,43 @@ const TableComp = ( { data, titles, widths, events } ) => {
                                                         </Tooltip>
                                                     ))
                                                 }
+                                            </StyledTableCell>
+                                        }
+                                        {
+                                            changeStatus && <StyledTableCell style={{ padding: '5px'}} >
+                                                {
+                                                    changeStatus.map(({onChangeStatus, value}, index) => (
+                                                        <Select
+                                                            key={index}
+                                                            style={{width:'100%', }}
+                                                            onChange={() => onChangeStatus(rowId)}
+                                                            disabled={row[2] !== null && true}
+                                                            // value={row[2] === null ? 'Activo' : 'Finalizado'}
+                                                            value={row[2] === null ? 'Activo' : value}
+                                                            optionFilterProp="children"
+                                                            options={[
+                                                                {
+                                                                    label: ['Finalizar'],
+                                                                    value: rowId,
+                                                                }
+                                                            ]}
+                                                        />
+                                                    ))
+                                                } 
+                                                {
+                                                    // changeStatus.map(({onChangeStatus, value}, index) => (
+                                                    //         <Select style={{ width:'100%', height:'30px'}}
+                                                    //             disabled={row[2] !== null && true}
+                                                    //             onChange={() => onChangeStatus(rowId)}
+                                                    //             value={row[2] === null ? 'Activo' : rowId}
+                                                    //             displayEmpty
+                                                    //             inputProps={{ 'aria-label': 'Without label' }}
+                                                    //         >
+                                                    //             <MenuItem value={rowId}>Finalizado</MenuItem>
+                                                    //             <MenuItem disabled={row[2] === null && true} value='Activo'>Activo</MenuItem>
+                                                    //         </Select>
+                                                    // ))
+                                                }                                                                                      
                                             </StyledTableCell>
                                         }
                                     </StyledTableRow>

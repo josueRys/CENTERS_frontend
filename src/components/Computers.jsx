@@ -56,7 +56,7 @@ const Computers = () => {
     }
 
     const titles = ['Modelo', 'Compañía', 'Tipo', 'Eventos']
-    const widths = ['25%', '25%', '25%', '25%']
+    const widths = ['35%', '30%', '20%', '15%']
     const events = [ { icon: <MdDelete style={{ width:'100%', height:'auto' }} />, variant:'danger', onclick: handleDelete, tooltip:[ 'Eliminar','left' ] }, 
                      { icon: <MdDriveFileRenameOutline style={{ width:'100%', height:'auto' }} />, variant:'success', onclick: handleUpdate, tooltip:[ 'Actualizar','top' ] }, 
                     /*  { icon: <MdRemoveRedEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: handleView, tooltip:[ 'Ver','right' ] } */ ] 

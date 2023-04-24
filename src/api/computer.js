@@ -26,6 +26,15 @@ export const readComputers = async (current) => {
     }
 }
 
+export const readComputersName = async (id_center) => {
+    try {
+        const res = await axios.get(`${__API__}computers?idCenter=${id_center}`)
+        return res
+    } catch (error) {
+        return error
+    }
+}
+
 export const readComputer = async (id) => {
     try {
         const res = await axios.get(`${__API__}computers/${id}`)

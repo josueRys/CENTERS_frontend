@@ -40,7 +40,7 @@ const footerStyle = {
 
 
 const View = () => {
-    const [collapse, setCollapsed] = useState(false);
+    const [collapse, setCollapsed] = useState(true);
     const toggleCollapsed = () => {
         setCollapsed(!collapse);
     };
@@ -57,14 +57,14 @@ const View = () => {
             icon: <FaUsers className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
         },
         {
-            title: 'Registros',
-            to: 'registers',
-            icon: <FaTable className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
-        },
-        {
             title: 'Equipos',
             to: 'computers',
             icon: <FaLaptop className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
+        },
+        {
+            title: 'Registros',
+            to: 'registers',
+            icon: <FaTable className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
         }
     ]
 
