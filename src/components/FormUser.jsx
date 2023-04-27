@@ -1,10 +1,34 @@
 import { LockOutlined, PhoneOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Col, Empty, Form, Input, Select, Space } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUser, updateUser } from '../api/user';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { readCentersName } from '../api/center';
 
 const FormUser = ( {setReload, reload, handleClose, update = null} ) => {
+
+    const [ centers, setCenters ] = useState(null)
+
+    useEffect(() => {
+        getCenters()
+    },[])
+
+    const getCenters = async () => {
+        let centers = []
+        const res = await readCentersName()
+        if(res.status === 200){
+            const data = res.data
+            data.map(center =>{
+                centers = [...centers,{
+                    label: center.name,
+                    value: center.id,
+                    key: center.id
+                }]
+            })
+
+        }
+        setCenters(centers)
+    }
 
     const onFinish = async values => {
 
@@ -14,10 +38,10 @@ const FormUser = ( {setReload, reload, handleClose, update = null} ) => {
             console.log(res)
             handleClose()
         } else {
-            // console.log(values)    
-            const res = await createUser(values)
-            console.log(res)
-            handleClose()
+            console.log(values)    
+            // const res = await createUser(values)
+            // console.log(res)
+            // handleClose()
         }
 
         setReload(reload+1)
@@ -41,33 +65,58 @@ const FormUser = ( {setReload, reload, handleClose, update = null} ) => {
      ]
 
     return (
-        <Form fields={fields} /* name="normal_login" className="login-form" */ initialValues={{ remember: false, }} onFinish={onFinish} >
+        <Form fields={fields} initialValues={{ remember: false, }} onFinish={onFinish} >
 
-            <Form.Item name="username" rules={[ { required: true, message: 'Ingresa el nombre del Usuario!', }, ]} >
+            <Form.Item label='Usuario' name="username" rules={[ { required: true, message: 'Ingresa el nombre del Usuario!', }, ]} >
                 <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Usuario" type='text' />
             </Form.Item>
 
-            <Form.Item name="password" rules={[ { required: true, message: 'Ingresa tu contraseña!', }, ]} >
+            <Form.Item label='Contraseña' name="password" rules={[ { required: true, message: 'Ingresa tu contraseña!', }, ]} >
                 <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Contraseña" />
             </Form.Item>
 
-            {/* <Form.Item name="passwordAgain" rules={[ { required: true, message: 'Ingresa la contraseña!', }, ]} >
-                <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Ingrese nuevamente la Contraseña" />
-            </Form.Item> */}
-
-            <Form.Item name="phone_number" rules={[ { required: true, message: 'Ingresa el número!', }, ]} >
+            <Form.Item label='Teléfono' name="phone_number" rules={[ { required: true, message: 'Ingresa el número!', }, ]} >
                 <Input prefix={<PhoneOutlined className="site-form-item-icon" />} type="text" placeholder="Numero telefónico" />
             </Form.Item>
-            {/* <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>Recuérdame</Checkbox>
-                </Form.Item>
-                <a className="login-form-forgot" href="" style={{ float:'right' }} >Olvidé mi contraseña</a>
-            </Form.Item> */}
 
+            <Col span={24} >
+                <Form.Item label='Centro' name='centers' >
+                    <Select
+                        showSearch
+                        notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                        optionFilterProp="children"
+                        mode='multiple'
+                        filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
+                        placeholder='Buscar Centro'
+                        options={centers}
+                    />
+                </Form.Item>
+            </Col>
+
+            <Col span={12}>
+                <Form.Item label='Rol' name='rol' initialValue='client' >
+                    <Select
+                        showSearch
+                        disabled
+                        notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+                        optionFilterProp="children"
+                        filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
+                        placeholder='Rol'
+                        options={[
+                            {
+                                label: 'Administrador',
+                                value: 'admin'
+                            },
+                            {
+                                label: 'Cliente',
+                                value: 'client'
+                            }
+                        ]}
+                    />
+                </Form.Item>
+            </Col>
             <Form.Item>
                 <Button type='primary' htmlType="submit" className="login-form-button btn-success" style={{ width:'100%' }} >{`${update ? 'Actualizar' : 'Registrar'}`}</Button>
-                {/* <button type="submit" onClick={handleSubmit} className={`btn btn-${update ? 'success' : 'primary'} d-block mx-auto `}> { update ? 'Actualizar' : 'Guardar' } </button> */}
             </Form.Item>
 
         </Form>

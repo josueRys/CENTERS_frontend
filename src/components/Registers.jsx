@@ -56,9 +56,7 @@ const Registers = () => {
 
     return (
         <div>
-            {
-                <FlexButton titleTip= 'Nuevo Registro' tooltipPosition = 'left' onClick={handleShowModal} style={{ bottom: 20, right: 20 }} />
-            }
+            <FlexButton titleTip= 'Nuevo Registro' tooltipPosition = 'left' onClick={handleShowModal} style={{ bottom: 20, right: 20 }} />
             {
                 registers
                     ? <TableComp data={registers} titles={titles} widths={widths} changeStatus={changeStatus} />

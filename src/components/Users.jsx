@@ -7,6 +7,8 @@ import TableComp from "./TableComp"
 import SkeletonComp from "./SkeletonComp"
 import { MdDelete, MdDriveFileRenameOutline } from "react-icons/md"
 import PaginationComp from "./PaginationComp"
+import { BsFillBuildingFill } from "react-icons/bs"
+import { FaEye } from "react-icons/fa"
 
 const Users = () => {
     const [ show, setShow ] = useState(false)
@@ -54,12 +56,16 @@ const Users = () => {
         setShow2(true)
     }
 
+    const AssignCenter = (row) => {
+        console.log(row)
+    }
+
     const widths = [ '30%', '30%', '25%','15%' ]
 
     const titles = [ 'Usuario', 'Password', 'Telefono', 'Eventos' ]
     const events = [ { icon: <MdDelete style={{ width:'100%', height:'auto' }} />, variant:'danger', onclick: handleDelete, tooltip:[ 'Eliminar','left' ] }, 
                      { icon: <MdDriveFileRenameOutline style={{ width:'100%', height:'auto' }} />, variant:'success', onclick: handleUpdate, tooltip:[ 'Actualizar','top' ] }, 
-                    /*  { icon: <MdRemoveRedEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: handleView, tooltip:[ 'Ver','right' ] } */ ] 
+                     { icon: <FaEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: AssignCenter, tooltip:[ 'Asignar Centro','top' ] } ] 
     
     return (
         <div>

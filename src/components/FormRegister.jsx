@@ -45,7 +45,8 @@ const FormRegister = ( {handleClose, reload, setReload} ) => {
                 users = [...users,{
                     value: user.id,
                     label: user.username,
-                    key: user.id
+                    key: user.id,
+                    disabled: user.status === 1 ? true : false
                 }]
             })
         }
@@ -61,7 +62,8 @@ const FormRegister = ( {handleClose, reload, setReload} ) => {
                 computers = [...computers,{
                     value: computer.id,
                     label: computer.model,
-                    key: computer.id
+                    key: computer.id,
+                    disabled: computer.status === 1 ? true : false
                 }]
             })
         }
@@ -104,25 +106,24 @@ const FormRegister = ( {handleClose, reload, setReload} ) => {
             
         <Form fields={fields} onFinish={onFinish} >
             <Col span={24} >
-                <Form.Item name="id_center" rules={[ { required: true, message: 'Selecciona un Centro!', }, ]} >
+                <Form.Item label='Centro' name="id_center" rules={[ { required: true, message: 'Selecciona un Centro!', }, ]} >
                     <Select
                         showSearch
                         filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
                         notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                        placeholder="Centro"
+                        placeholder="Buscar Centro"
                         optionFilterProp="children"
                         onChange={onChangeCenter}
                         options={centers}
                     />
                 </Form.Item>
             </Col>
-            <Space.Compact block >
-                <Col span={12} >
-                    <Form.Item name="id_user" rules={[ { required: true, message: 'Selecciona un Usuario!', }, ]} >
+                <Col span={24} >
+                    <Form.Item label='Usuario' name="id_user" rules={[ { required: true, message: 'Selecciona un Usuario!', }, ]} >
                         <Select
                             showSearch
                             notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                            placeholder="Usuario"
+                            placeholder="Buscar Usuario"
                             optionFilterProp="children"
                             onChange={onChangeUser}
                             filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
@@ -130,12 +131,12 @@ const FormRegister = ( {handleClose, reload, setReload} ) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col span={12} >
-                    <Form.Item name="id_computer" rules={[ { required: true, message: 'Selecciona un Equipo!', }, ]} >
+                <Col span={24} >
+                    <Form.Item label='Computadora' name="id_computer" rules={[ { required: true, message: 'Selecciona un Equipo!', }, ]} >
                         <Select
                             showSearch
                             notFoundContent={ <Empty description={ <span>Sin datos</span> } image={Empty.PRESENTED_IMAGE_SIMPLE} />}
-                            placeholder="Equipo de cómputo"
+                            placeholder="Buscar Computadora"
                             optionFilterProp="children"
                             onChange={onChangeComputer}
                             filterOption={ ( input, option ) => ( option?.label ?? '' ).toLowerCase().includes(input.toLowerCase()) }
@@ -143,7 +144,6 @@ const FormRegister = ( {handleClose, reload, setReload} ) => {
                         />
                     </Form.Item>
                 </Col>
-            </Space.Compact>
             <Col span={24} >
                 <Form.Item>
                     <Button type='primary' htmlType="submit" className="login-form-button btn-success" style={{ width:'100%' }} >Registrar</Button>

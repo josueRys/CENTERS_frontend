@@ -25,7 +25,8 @@ const FlexButton = (props) => {
             left:  style?.left || 'none',
             right:  style?.right || 'none',
             bottom:  style?.bottom || 'none',
-            position: style?.position ||'fixed'
+            position: style?.position ||'fixed',
+            zIndex : style?.zIndex || '2'
         });
         setIcon(icon || faPlus);
         setColor(color || '#FFF');
