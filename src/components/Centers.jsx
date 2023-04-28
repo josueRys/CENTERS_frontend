@@ -9,6 +9,8 @@ import ModalComp from "./ModalComp";
 import PaginationComp from "./PaginationComp.jsx";
 import SkeletonComp from "./SkeletonComp.jsx";
 import { MdDelete, MdRemoveRedEye, MdSystemUpdate, MdDriveFileRenameOutline } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Centers = () => {
     const [ show, setShow ] = useState(false)
@@ -18,6 +20,8 @@ const Centers = () => {
     const [ totalItems, setTotalItems ] = useState(0)
     const [ current, setCurrent ] = useState(1)
     const [ update, setUpdate ] = useState(null)
+
+    const navigate = useNavigate()
 
     const handleShowModal = () => setShow(true)
     const handleClose = () => {
@@ -60,15 +64,17 @@ const Centers = () => {
 
     const handleView= (row) => {
         console.log('Viendo: '+row)
+        // navigate(`${row}`)
+        navigate(`${row}`)
     }
 
     const events = [ { icon: <MdDelete style={{ width:'100%', height:'auto' }} />, variant:'danger', onclick: handleDelete, tooltip:[ 'Eliminar','left' ] }, 
                      { icon: <MdDriveFileRenameOutline style={{ width:'100%', height:'auto' }} />, variant:'success', onclick: handleUpdate, tooltip:[ 'Actualizar','top' ] }, 
-                    /*  { icon: <MdRemoveRedEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: handleView, tooltip:[ 'Ver','right' ] } */ ]
+                     { icon: <FaEye style={{ width:'100%', height:'auto' }} />, variant:'primary', onclick: handleView, tooltip:[ 'Ver','right' ] } ]
     
-    const titles = [ 'Nombre', 'Coordenadas','Dirección' , 'Teléfono', 'Eventos' ]
+    const titles = [ 'Nombre','Dirección', 'Teléfono', 'Eventos' ]
 
-    const widths = [ '17%','25%','27%','15%','15%' ]
+    const widths = [ '30%','35%','20%','15%' ]
 
     return (
         <div >

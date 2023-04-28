@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Users from './components/Users'
 import Registers from './components/Registers'
 import Computers from './components/Computers'
+import CenterPage from './pages/CenterPage'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/' element = {<Struct />}>
             <Route path='centers' element = { <Centers/> } />
+            <Route path='centers/:id' element={ <CenterPage /> } />
             <Route path='users' element={<Users />} />
             <Route path='registers' element={<Registers />} />
             <Route path='computers' element={ <Computers /> } />
