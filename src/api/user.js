@@ -1,8 +1,13 @@
 import axios from "axios"
 import { __API__ } from "../config"
 
+const instance = axios.create({
+    baseURL: `${__API__}`,
+    withCredentials: true
+})
+
 export const createUser = async ({username, password, phone_number}) => {
-    const res = await axios.post( `${__API__}users`,{
+    const res = await instance.post( `users`,{
         username,
         password,
         phone_number
@@ -12,13 +17,13 @@ export const createUser = async ({username, password, phone_number}) => {
 }
 
 export const readUser = async (id) => {
-    const res = await axios.get(`${__API__}users/${id}`)
+    const res = await instance.get(`users/${id}`)
     return res
 }
 
 export const readUserName = async (idCenter) => {
     try {
-        const res = await axios.get(`${__API__}users?idCenter=${idCenter}`)
+        const res = await instance.get(`users?idCenter=${idCenter}`)
         return res
     } catch (error) {
         return error
@@ -27,7 +32,7 @@ export const readUserName = async (idCenter) => {
 
 export const updateUser = async (id, form) => {
     const { username, password, phone_number } = form
-    const res = await axios.patch(`${__API__}users/${id}`,{
+    const res = await instance.patch(`users/${id}`,{
         username,
         password,
         phone_number
@@ -37,14 +42,14 @@ export const updateUser = async (id, form) => {
 }
 
 export const deleteUser = async (id) => {
-    const res = await axios.delete(`${__API__}users/${id}`)
+    const res = await instance.delete(`users/${id}`)
     return res
 }
 
 export const readUsers = async (current,idCenter) => {
     let res = {data: { data:[],totalCount:0 } }
     try {
-        res = await axios.get( `${__API__}users?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
+        res = await instance.get( `users?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
         return res
     } catch (error) {
         return res       

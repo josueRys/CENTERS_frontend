@@ -1,11 +1,14 @@
 import axios from "axios"
 import { __API__ } from "../config"
 
-// crud
+const instance = axios.create({
+    baseURL: `${__API__}`,
+    withCredentials: true
+})
 
 export const createComputers = async ({ model, company, type, id_center }) => {
     try {
-        const res = await axios.post(`${__API__}computers`,{
+        const res = await instance.post(`computers`,{
             model,
             company,
             type,
@@ -19,7 +22,7 @@ export const createComputers = async ({ model, company, type, id_center }) => {
 
 export const readComputers = async (current,idCenter) => {
     try {
-        const res = await axios.get(`${__API__}computers?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
+        const res = await instance.get(`computers?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
         return res
     } catch (error) {
         return error
@@ -28,7 +31,7 @@ export const readComputers = async (current,idCenter) => {
 
 export const readComputersName = async (id_center) => {
     try {
-        const res = await axios.get(`${__API__}computers?idCenter=${id_center}`)
+        const res = await instance.get(`computers?idCenter=${id_center}`)
         return res
     } catch (error) {
         return error
@@ -37,7 +40,7 @@ export const readComputersName = async (id_center) => {
 
 export const readComputer = async (id) => {
     try {
-        const res = await axios.get(`${__API__}computers/${id}`)
+        const res = await instance.get(`computers/${id}`)
         return res
     } catch (error) {
         return error
@@ -47,7 +50,7 @@ export const readComputer = async (id) => {
 export const updateComputer = async (id, form) => {
     try {
         const {model, company, type, id_center} = form
-        const res = await axios.patch(`${__API__}computers/${id}`,{
+        const res = await instance.patch(`computers/${id}`,{
             model,
             company,
             type,
@@ -61,7 +64,7 @@ export const updateComputer = async (id, form) => {
 
 export const deleteComputer = async (id) => {
     try {
-        const res = await axios.delete(`${__API__}computers/${id}`)
+        const res = await axios.delete(`computers/${id}`)
         return res
     } catch (error) {
         return error
