@@ -10,7 +10,7 @@ import PaginationComp from "./PaginationComp"
 import { BsFillBuildingFill } from "react-icons/bs"
 import { FaEye } from "react-icons/fa"
 
-const Users = () => {
+const Users = ( {idCenter = null} ) => {
     const [ show, setShow ] = useState(false)
     const [ show2, setShow2 ] = useState(false)
     const [ users, setUsers ] = useState(null)
@@ -30,7 +30,7 @@ const Users = () => {
     }, [ current, reload ] )
 
     const getData = async () =>{
-        const res = await readUsers(current)
+        const res = await readUsers(current,idCenter)
         if(res.status === 200){
             const { data } = res
             let {totalCount} = data

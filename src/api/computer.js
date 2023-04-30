@@ -17,9 +17,9 @@ export const createComputers = async ({ model, company, type, id_center }) => {
     }
 }
 
-export const readComputers = async (current) => {
+export const readComputers = async (current,idCenter) => {
     try {
-        const res = await axios.get(`${__API__}computers?page=${current}`)
+        const res = await axios.get(`${__API__}computers?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
         return res
     } catch (error) {
         return error

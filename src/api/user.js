@@ -41,10 +41,10 @@ export const deleteUser = async (id) => {
     return res
 }
 
-export const readUsers = async (current) => {
+export const readUsers = async (current,idCenter) => {
     let res = {data: { data:[],totalCount:0 } }
     try {
-        res = await axios.get( `${__API__}users?page=${current}`)
+        res = await axios.get( `${__API__}users?page=${current}&idCenter=${idCenter ? idCenter : ''}`)
         return res
     } catch (error) {
         return res       

@@ -8,7 +8,7 @@ import ModalComp from "./ModalComp"
 import PaginationComp from "./PaginationComp"
 import FormComputer from "./FormComputer"
 
-const Computers = () => {
+const Computers = ( { idCenter = null } ) => {
     const [ computers, setComputers ] = useState(null)
     const [ show, setShow ] = useState(false)
     const [ show2, setShow2 ] = useState(false)
@@ -27,10 +27,12 @@ const Computers = () => {
         getData()
     },[current, reload])
 
+    console.log(idCenter)
+
     const getData = async () => {
         let res
         let data = []
-        res = await readComputers(current)
+        res = await readComputers(current, idCenter)
         // console.log(res)
 
         if (res.status === 200){

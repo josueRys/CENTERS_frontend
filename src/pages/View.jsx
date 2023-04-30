@@ -108,7 +108,7 @@ const View = () => {
                     </div>
             </Header>
 
-            <Content  /* style={contentStyle} */ className='p-3' >
+            <Content  /* style={contentStyle} */ className='p-3 bg-white ' >
                 <Outlet/>
             </Content>
             {/* <Footer style={footerStyle}>Footer</Footer> */}
