@@ -7,11 +7,14 @@ import Users from "../components/Users"
 import { FaLaptop, FaTable, FaUser, FaUsers } from "react-icons/fa"
 import Computers from "../components/Computers"
 import Registers from "../components/Registers"
+import ModalComp from "../components/ModalComp"
+import FormRol from "../components/FormRol"
 
 const CenterPage = () => {
     
     const { id }  = useParams()
     const [ center, setCenter ] = useState(null)
+    const [ show, setShow ] = useState(false)
 
     useEffect(() => {
         getData()
@@ -25,6 +28,9 @@ const CenterPage = () => {
             // console.log(center)
         }
     }
+
+    const handleShowModal = () => setShow(true)
+    const handleClose = () => setShow(false)
 
     const items = [ 
         {
@@ -40,29 +46,42 @@ const CenterPage = () => {
         {
             label: ( <span> <FaTable /> Registros </span> ),
             key: 'Registers',
-            children: <Registers />
+            children: 'Módulo en desarrollo . . .'
+            // children: <Registers />
         }
     ]
 
     return (
-        center
-            ?   <div>
-                    <p className="h3 text-center" > {center.name} </p>
-                    <div className="d-flex justify-content-end" >
-                        <div className="d-flex align-items-center border rounded bg-white p-2 mx-2" > <MdOutlineLocationCity className="mx-2" /> <span className="border-start p-1" >{center.address}</span> </div>
-                        <div className="d-flex align-items-center border rounded bg-white p-2" > <MdPhone className="mx-2" /> <span className="border-start p-1" >{center.phone_number}</span> </div>
-                    </div>
-                    <div>
-                        <Tabs
-                            style={{ marginTop: '10px' }}
-                            defaultActiveKey="1"
-                            // type="card"
-                            size="small"
-                            items={items}
+        <div>
+            {
+                center
+                    ?   <div>
+                            <p className="h3 text-center" > {center.name} </p>
+                            <div className="d-flex justify-content-end" >
+                                <div className="d-flex align-items-center border rounded p-1 bg-white mx-2" > <MdOutlineLocationCity className="mx-2" /> <span className="border-start p-1" >Administrador: Nombre Apellido</span> </div>
+                                <button type="button" className="btn btn-primary me-auto " onClick={handleShowModal} >Editar</button>            
+                                <div className="d-flex align-items-center border rounded p-1 bg-white mx-2" > <MdOutlineLocationCity className="mx-2" /> <span className="border-start p-1" >{center.address}</span> </div>
+                                <div className="d-flex align-items-center border rounded p-1 bg-white" > <MdPhone className="mx-2" /> <span className="border-start p-1" >{center.phone_number}</span> </div>
+                            </div>
+                            <div>
+                                <Tabs
+                                    style={{ marginTop: '10px' }}
+                                    defaultActiveKey="1"
+                                    type="card"
+                                    size="small"
+                                    items={items}
+                                />
+                            </div>
+                        </div>
+                    :   <Empty description='Sin datos' />           
+            }
+            {
+                show && <ModalComp
+                            body={ <FormRol idCenter={id} /> }
+                            title='Asignar Rol'
                         />
-                    </div>
-                </div>
-            :   <Empty description='Sin datos' />
+            }
+        </div>
     )
 }
 

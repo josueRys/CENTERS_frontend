@@ -27,8 +27,6 @@ const Computers = ( { idCenter = null } ) => {
         getData()
     },[current, reload])
 
-    console.log(idCenter)
-
     const getData = async () => {
         let res
         let data = []

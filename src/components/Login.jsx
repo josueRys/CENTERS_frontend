@@ -4,18 +4,19 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../api/login';
 import { useToast } from '@chakra-ui/react'
+import { useState } from 'react';
 
-const Login = () => {
+const Login = ( { setUser } ) => {
   const toast = useToast()
   const navigate = useNavigate()
 
   const onFinish = async (values) => {
 
 
-    const {status} = await login(values)
-
-
-    if (status === 200){
+    const res = await login(values)
+    if (res.status === 200){
+      // console.log(res.data.data[0].username)
+      setUser(res.data.data[0].username)
       navigate('/centers')
     } else {
         toast({

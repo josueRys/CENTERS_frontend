@@ -5,6 +5,7 @@ import { FaUsers, FaTable, FaLaptop, FaUser } from "react-icons/fa";
 import { BsFillBuildingFill } from "react-icons/bs"
 import { LeftOutlined, RightOutlined, } from '@ant-design/icons';
 import "../css/view.css"
+import { MdLogout } from "react-icons/md";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -39,7 +40,7 @@ const footerStyle = {
 };
 
 
-const View = () => {
+const View = ({user}  ) => {
     const [collapse, setCollapsed] = useState(true);
     const toggleCollapsed = () => {
         setCollapsed(!collapse);
@@ -65,6 +66,11 @@ const View = () => {
             title: 'Registros',
             to: 'registers',
             icon: <FaTable className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
+        },
+        {
+            title: 'Cerrar',
+            to: 'logout',
+            icon: <MdLogout className={collapse ? 'm-1 mx-3' : 'mx-3'}/>
         }
     ]
 
@@ -74,47 +80,47 @@ const View = () => {
     return (
         <Layout style={{height: '100vh', width:'100%'}} >
 
-        <Sider trigger={null} collapsible collapsed={collapse} style={siderStyle}>
+            <Sider trigger={null} collapsible collapsed={collapse} style={siderStyle}>
 
-            <Button className="m-auto my-3" type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16, background: '#fff', color:'black', display:'flex', alignItems:'center' }} >
-                {collapse ? <RightOutlined/> : <LeftOutlined />}
-            </Button>
+                <Button className="m-auto my-3" type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16, background: '#fff', color:'black', display:'flex', alignItems:'center' }} >
+                    {collapse ? <RightOutlined/> : <LeftOutlined />}
+                </Button>
 
-            <div className="d-grid" >
-                {
-                    items.map((item) => (
-                        <Tooltip key={ item.title } placement="right" title={collapse  && item.title} >
-                            <NavLink className={ ({isActive}) => (isActive ? activeStyle : not_activeStyle ) } type="button" to= { `./${item.to}` } >
-                                {item.icon}
-                                <span className={collapse ? 'collapse collapse-horizontal' : ''} >
-                                    {item.title}
-                                </span >
-                            </NavLink>
-                        </Tooltip>
-                    ))
-                }
-            </div> 
+                <div className="d-grid" >
+                    {
+                        items.map((item) => (
+                            <Tooltip key={ item.title } placement="right" title={collapse  && item.title} >
+                                <NavLink className={ ({isActive}) => (isActive ? activeStyle : not_activeStyle ) } type="button" to= { `./${item.to}` } >
+                                    {item.icon}
+                                    <span className={collapse ? 'collapse collapse-horizontal' : ''} >
+                                        {item.title}
+                                    </span >
+                                </NavLink>
+                            </Tooltip>
+                        ))
+                    }
+                </div> 
 
-        </Sider> 
+            </Sider> 
 
-        <Layout>
-            
-            <Header style={headerStyle} className='d-flex align-items-center p-0' >
-                    <div className="w-100 d-flex align-items-end " ><h1>TechSentinel</h1></div>
-                    <div>
-                        <button className="btn text-white-50 " >
-                            <FaUser style={{height:'30px', width:'30px'}} />
-                        </button>
-                    </div>
-            </Header>
 
-            <Content  /* style={contentStyle} */ className='p-3 bg-white ' >
-                <Outlet/>
-            </Content>
-            {/* <Footer style={footerStyle}>Footer</Footer> */}
+            <Layout>
+                
+                <Header style={headerStyle} className='d-flex align-items-center p-0' >
+                        <div className="w-100 d-flex align-items-end " ><h1>TechSentinel</h1></div>
+                        <div className="d-flex align-items-center" >
+                            { user && <span className="h5" >{user}</span> }
+                            <button className="btn text-white-50 " >
+                                <FaUser style={{height:'30px', width:'30px'}} />
+                            </button>
+                        </div>
+                </Header>
+
+                <Content className='p-3 bg-white ' >
+                    <Outlet />
+                </Content>
+            </Layout>
         </Layout>
-
-    </Layout>
     );
 };
 

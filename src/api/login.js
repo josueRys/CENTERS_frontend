@@ -12,16 +12,20 @@ export const login = async ( {username, password} ) => {
         const res = await instance.post( `login`, {
             username,
             password
-        } )
-        console.log(res)        
+        } )        
         return res
         
     } catch (error) {
         console.log(error)
         return status
     }
+}
 
-
-    // console.log(res)
-
+export const logout = async () => {
+    try {
+        const res = await instance.post(`logout`)
+        return res
+    } catch (error) {
+        return error
+    }
 }
